@@ -1,0 +1,98 @@
+@import "tailwindcss";
+
+:root {
+  --color-primary: #2E5A2B;
+  --color-primary-light: #3D7339;
+  --color-secondary: #4C8A45;
+  --color-turmeric: #B87518;
+  --color-turmeric-light: #D98C24;
+  --color-warm-clay: #A8563C;
+  --color-warm-clay-light: #C2684D;
+  --color-ground: #F3F5EF;
+  --color-surface: #FCFDF9;
+  --color-surface-subtle: #E8ECE2;
+  --color-border: #DDE2D4;
+  --color-text: #151B12;
+  --color-text-secondary: #5D6B57;
+  --color-text-muted: #798873;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --color-primary: #5BA852;
+    --color-primary-light: #72C069;
+    --color-secondary: #6DB365;
+    --color-turmeric: #DFA74E;
+    --color-turmeric-light: #F2BE6C;
+    --color-warm-clay: #CA7257;
+    --color-warm-clay-light: #E0896F;
+    --color-ground: #10150F;
+    --color-surface: #182016;
+    --color-surface-subtle: #222C1F;
+    --color-border: #2B3827;
+    --color-text: #F1F4ED;
+    --color-text-secondary: #A4B59D;
+    --color-text-muted: #7E8F79;
+  }
+}
+
+[data-theme="dark"] {
+  --color-primary: #5BA852;
+  --color-primary-light: #72C069;
+  --color-secondary: #6DB365;
+  --color-turmeric: #DFA74E;
+  --color-turmeric-light: #F2BE6C;
+  --color-warm-clay: #CA7257;
+  --color-warm-clay-light: #E0896F;
+  --color-ground: #10150F;
+  --color-surface: #182016;
+  --color-surface-subtle: #222C1F;
+  --color-border: #2B3827;
+  --color-text: #F1F4ED;
+  --color-text-secondary: #A4B59D;
+  --color-text-muted: #7E8F79;
+}
+
+body {
+  background-color: var(--color-ground);
+  color: var(--color-text);
+  font-family: 'Karla', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.font-serif-display {
+  font-family: 'Fraunces', Georgia, serif;
+}
+
+.font-sans-body {
+  font-family: 'Karla', system-ui, sans-serif;
+}
+
+.font-tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Custom scrollbar for horizontal calendar table */
+.calendar-scroll::-webkit-scrollbar {
+  height: 6px;
+}
+.calendar-scroll::-webkit-scrollbar-track {
+  background: var(--color-surface-subtle);
+}
+.calendar-scroll::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 3px;
+}
+.calendar-scroll::-webkit-scrollbar-thumb:hover {
+  background: var(--color-turmeric);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

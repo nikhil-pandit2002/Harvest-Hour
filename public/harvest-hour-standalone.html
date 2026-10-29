@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Harvest Hour · Farm to Fork</title>
+  <meta name="description" content="Fourteen organic acres an hour south of Bengaluru. Harvest your own vegetables, cook them with our chef, and sit down to them while they are still warm from the field." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..600&family=Karla:ital,wght@0,300..800;1,300..700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --color-primary: #2E5A2B;
+      --color-primary-light: #3D7339;
+      --color-secondary: #4C8A45;
+      --color-turmeric: #B87518;
+      --color-warm-clay: #A8563C;
+      --color-ground: #F3F5EF;
+      --color-surface: #FCFDF9;
+      --color-surface-subtle: #E8ECE2;
+      --color-border: #DDE2D4;
+      --color-text: #151B12;
+      --color-text-secondary: #5D6B57;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --color-primary: #5BA852;
+        --color-primary-light: #72C069;
+        --color-secondary: #6DB365;
+        --color-turmeric: #DFA74E;
+        --color-warm-clay: #CA7257;
+        --color-ground: #10150F;
+        --color-surface: #182016;
+        --color-surface-subtle: #222C1F;
+        --color-border: #2B3827;
+        --color-text: #F1F4ED;
+        --color-text-secondary: #A4B59D;
+      }
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background-color: var(--color-ground);
+      color: var(--color-text);
+      font-family: 'Karla', sans-serif;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    h1, h2, h3, h4 {
+      font-family: 'Fraunces', Georgia, serif;
+      text-wrap: balance;
+      font-weight: 700;
+    }
+    .tabular { font-variant-numeric: tabular-nums; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+    .btn-primary {
+      display: inline-flex; align-items: center; justify-content: center;
+      background: var(--color-primary); color: #fff; padding: 12px 24px;
+      font-weight: 600; font-size: 15px; border-radius: 8px; border: none;
+      cursor: pointer; text-decoration: none; transition: background 0.2s;
+    }
+    .btn-primary:hover { background: var(--color-primary-light); }
+    .btn-secondary {
+      display: inline-flex; align-items: center; justify-content: center;
+      background: var(--color-surface); color: var(--color-text); padding: 12px 24px;
+      font-weight: 600; font-size: 15px; border-radius: 8px;
+      border: 1px solid var(--color-border); cursor: pointer; text-decoration: none;
+    }
+    .header-sticky {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(252, 253, 249, 0.95);
+      border-bottom: 1px solid var(--color-border);
+      backdrop-filter: blur(8px);
+    }
+    @media (prefers-color-scheme: dark) {
+      .header-sticky { background: rgba(24, 32, 22, 0.95); }
+    }
+    .nav-wrap { display: flex; align-items: center; justify-content: space-between; height: 80px; gap: 32px; }
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a { color: var(--color-text-secondary); text-decoration: none; font-size: 14px; font-weight: 500; }
+    .nav-links a:hover { color: var(--color-text); }
+    .hero-sec { padding: 96px 0 112px; text-align: center; border-bottom: 1px solid var(--color-border); }
+    .hero-h1 { font-size: clamp(36px, 5vw, 64px); line-height: 1.1; margin: 16px auto; max-width: 900px; }
+    .hero-sub { font-size: 19px; color: var(--color-text-secondary); max-width: 680px; margin: 0 auto 36px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 32px; }
+    .card { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 16px; overflow: hidden; padding: 28px; }
+    .turmeric-text { color: var(--color-turmeric); font-weight: 700; }
+    .timeline-item { display: flex; gap: 24px; margin-bottom: 32px; }
+    .timeline-time { min-width: 80px; font-size: 22px; font-weight: 700; color: var(--color-turmeric); font-variant-numeric: tabular-nums; }
+    .stat-fig { font-size: 56px; color: var(--color-primary); font-weight: 700; font-family: 'Fraunces', serif; }
+    table { width: 100%; border-collapse: collapse; text-align: left; }
+    th, td { padding: 12px 8px; border-bottom: 1px solid var(--color-border); font-size: 13px; }
+    .table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .filled-cell { background: var(--color-primary); width: 16px; height: 16px; border-radius: 4px; margin: 0 auto; }
+    .cur-month { background: rgba(184, 117, 24, 0.15); border-left: 2px solid var(--color-turmeric); border-right: 2px solid var(--color-turmeric); }
+    .form-group { margin-bottom: 16px; }
+    .form-group label { display: block; font-size: 12px; font-weight: 600; text-transform: uppercase; margin-bottom: 6px; }
+    .form-control { width: 100%; padding: 10px 14px; border-radius: 8px; border: 1px solid var(--color-border); background: var(--color-ground); color: var(--color-text); font-size: 14px; }
+    footer { background: #121710; color: #E5EAE1; padding: 64px 0 32px; border-top: 1px solid #242F20; }
+    footer a { color: #A4B59D; text-decoration: none; }
+  </style>
+</head>
+<body>
+
+  <!-- 1. STICKY HEADER -->
+  <header class="header-sticky">
+    <div class="container nav-wrap">
+      <a href="#" style="text-decoration:none; display:flex; align-items:center; gap:12px; color:var(--color-text);">
+        <svg width="36" height="36" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="21" stroke="currentColor" stroke-width="2"/><circle cx="24" cy="24" r="2" fill="#B87518"/><path d="M24 24 Q21 16 23 8 Q24 7 25 8 Q27 16 24 24 Z" fill="#B87518"/><path d="M24 24 L31 16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        <div>
+          <strong style="font-family:'Fraunces',serif; font-size:22px; display:block; line-height:1;">Harvest Hour</strong>
+          <small style="font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--color-text-secondary);">Farm to Fork</small>
+        </div>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#things-to-do">Things to do</a></li>
+        <li><a href="#rates">Rates</a></li>
+        <li><a href="#visit">Visit</a></li>
+      </ul>
+      <a href="#book-a-day" class="btn-primary">Book a day</a>
+    </div>
+  </header>
+
+  <!-- 2. HERO -->
+  <section class="hero-sec">
+    <div class="container">
+      <p style="text-transform:uppercase; font-size:12px; letter-spacing:2px; font-weight:700; color:var(--color-primary); margin-bottom:12px;">Certified Organic Farm · Kanakapura Road</p>
+      <h1 class="hero-h1">Pick it. Cook it. Eat it within the hour.</h1>
+      <p class="hero-sub">Fourteen organic acres an hour south of Bengaluru. Harvest your own vegetables, cook them with our chef, and sit down to them while they are still warm from the field.</p>
+      <div style="display:flex; gap:16px; justify-content:center; margin-bottom:32px; flex-wrap:wrap;">
+        <a href="#book-a-day" class="btn-primary">Book a day</a>
+        <a href="#things-to-do" class="btn-secondary">See what happens here</a>
+      </div>
+      <p style="font-size:14px; color:var(--color-text-secondary);">Survey No. 112/3, Harohalli, Kanakapura Road · 58 km from MG Road · Open all 7 days a week (Monday to Sunday)</p>
+    </div>
+  </section>
+
+  <!-- 3. THINGS TO DO -->
+  <section id="things-to-do" style="padding:80px 0;">
+    <div class="container">
+      <h2 style="font-size:38px; margin-bottom:48px;">Things to do</h2>
+      <div class="grid-3">
+        <div class="card" style="padding:0; overflow:hidden;">
+          <img src="/assets/aistudio/images__8__82d9661e.jpg" alt="Pick your own harvest" style="width:100%; height:200px; object-fit:cover; display:block;" />
+          <div style="padding:24px;">
+            <h3>Pick your own</h3>
+            <p style="color:var(--color-text-secondary); margin:12px 0 24px;">Out into the rows with a crate and a knife. A grower walks with you and explains why the methi is good this week and the tomatoes are two weeks away. You cut only what you want to eat.</p>
+            <span class="turmeric-text tabular">Included · 75 minutes</span>
+          </div>
+        </div>
+        <div class="card" style="padding:0; overflow:hidden;">
+          <img src="/images/cook_with_chef.jpg" alt="Cook with the chef" style="width:100%; height:200px; object-fit:cover; display:block;" />
+          <div style="padding:24px;">
+            <h3>Cook with the chef</h3>
+            <p style="color:var(--color-text-secondary); margin:12px 0 24px;">You put your crate on the pass and the chef builds a menu around it, or you say what you feel like and he works out how to get there. Then you are on a station, not watching a demonstration.</p>
+            <span class="turmeric-text tabular">Included · 90 minutes</span>
+          </div>
+        </div>
+        <div class="card" style="padding:0; overflow:hidden;">
+          <img src="/assets/aistudio/images__7__6484c65a.jpg" alt="The pottery shed" style="width:100%; height:200px; object-fit:cover; display:block;" />
+          <div style="padding:24px;">
+            <h3>The pottery shed</h3>
+            <p style="color:var(--color-text-secondary); margin:12px 0 24px;">The same soil the vegetables come out of, on a wheel. Four wheels and a hand-building table, run by a potter from Channapatna. Children take their piece home fired the following week.</p>
+            <span class="turmeric-text tabular">Rs 900 a person · 60 minutes</span>
+          </div>
+        </div>
+        <div class="card" style="padding:0; overflow:hidden;">
+          <img src="/assets/aistudio/images__10__25671de6.jpg" alt="Farm school for children" style="width:100%; height:200px; object-fit:cover; display:block;" />
+          <div style="padding:24px;">
+            <h3>Farm school for children</h3>
+            <p style="color:var(--color-text-secondary); margin:12px 0 24px;">Forty minutes on soil, seed and compost, pitched at five to twelve year olds and run by someone who likes children. They plant one thing, label it, and come back to find it grown.</p>
+            <span class="turmeric-text tabular">Included for children · 40 minutes</span>
+          </div>
+        </div>
+        <div class="card" style="padding:0; overflow:hidden;">
+          <img src="/assets/aistudio/images__9__4c07651d.jpg" alt="Growing workshops" style="width:100%; height:200px; object-fit:cover; display:block;" />
+          <div style="padding:24px;">
+            <h3>Growing workshops</h3>
+            <p style="color:var(--color-text-secondary); margin:12px 0 24px;">For adults who want the balcony to work. Composting, seed saving, a kitchen garden in four pots, and what actually goes wrong in a Bengaluru summer. Small groups, one topic a weekend.</p>
+            <span class="turmeric-text tabular">Rs 1,200 a person · 90 minutes</span>
+          </div>
+        </div>
+        <div class="card" style="padding:0; overflow:hidden;">
+          <img src="/assets/aistudio/LENTO_201_b8b5c776.webp" alt="Farm shop and crates" style="width:100%; height:200px; object-fit:cover; display:block;" />
+          <div style="padding:24px;">
+            <h3>Farm shop and crates</h3>
+            <p style="color:var(--color-text-secondary); margin:12px 0 24px;">Take home what you could not eat, or put a crate on repeat and we deliver across Bengaluru on Saturdays. Members get first call on peak dates and two visits a year.</p>
+            <span class="turmeric-text tabular">Crates from Rs 1,400 a month</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. HOW A SUNDAY RUNS -->
+  <section style="padding:80px 0; background:var(--color-surface); border-y:1px solid var(--color-border);">
+    <div class="container" style="max-width:800px;">
+      <h2 style="font-size:38px; margin-bottom:48px;">How a Sunday runs</h2>
+      <div class="timeline-item"><span class="timeline-time">8:30</span><div><h3>Arrival</h3><p style="color:var(--color-text-secondary);">A cold press of whatever is heaviest on the vine, and a walk through what is ready today.</p></div></div>
+      <div class="timeline-item"><span class="timeline-time">9:15</span><div><h3>Harvest</h3><p style="color:var(--color-text-secondary);">Into the rows with a crate. Children get their own smaller one and are generally more ruthless about it than their parents.</p></div></div>
+      <div class="timeline-item"><span class="timeline-time">10:30</span><div><h3>Split</h3><p style="color:var(--color-text-secondary);">Adults to the kitchen or the growing workshop. Children to farm school, then the pottery shed. Nobody is left holding a phone.</p></div></div>
+      <div class="timeline-item"><span class="timeline-time">12:30</span><div><h3>The long table</h3><p style="color:var(--color-text-secondary);">Served in courses at the pavilion, facing the field you cut it from two hours earlier.</p></div></div>
+      <div class="timeline-item"><span class="timeline-time">14:00</span><div><h3>The shop</h3><p style="color:var(--color-text-secondary);">Crates, preserves, jaggery from the next village, and a sourdough starter if you ask nicely.</p></div></div>
+      <div style="margin-top:40px; border-radius:12px; overflow:hidden; border:1px solid var(--color-border);">
+        <img src="/assets/aistudio/al-fresco-outdoor-dining-area-restaurant-12671543_8b318cc7.webp" alt="The Long Table Pavilion" style="width:100%; height:320px; object-fit:cover; display:block;" />
+        <div style="padding:16px 20px; background:var(--color-surface); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+          <div><strong style="font-family:'Fraunces',serif; font-size:18px;">The Long Table Pavilion</strong><p style="font-size:13px; color:var(--color-text-secondary);">Twenty-five guests seated together facing the soil the vegetables left sixty minutes earlier.</p></div>
+          <span class="turmeric-text" style="font-size:12px; font-weight:700; text-transform:uppercase;">Course 1 Served 12:30 PM</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- 7. RATES -->
+  <section id="rates" style="padding:80px 0; background:var(--color-surface); border-y:1px solid var(--color-border);">
+    <div class="container">
+      <h2 style="font-size:38px; margin-bottom:48px;">Rates</h2>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(360px, 1fr)); gap:40px;">
+        <div class="card">
+          <h3 style="margin-bottom:20px; font-size:24px;">A day at the farm</h3>
+          <p style="margin-bottom:12px; display:flex; justify-content:space-between;"><span>Weekday (Wed–Fri)</span><strong class="turmeric-text tabular">Rs 2,800</strong></p>
+          <p style="margin-bottom:12px; display:flex; justify-content:space-between;"><span>Weekend (Sat & Sun)</span><strong class="turmeric-text tabular">Rs 3,500</strong></p>
+          <p style="margin-bottom:12px; display:flex; justify-content:space-between;"><span>Peak weekend (Nov–Feb)</span><strong class="turmeric-text tabular">Rs 4,200</strong></p>
+          <p style="margin-bottom:12px; display:flex; justify-content:space-between;"><span>Children (5–15, farm school included)</span><strong class="turmeric-text tabular">Rs 1,800</strong></p>
+          <p style="display:flex; justify-content:space-between;"><span>Under fives</span><strong class="turmeric-text">Free, and welcome</strong></p>
+        </div>
+        <div class="card">
+          <h3 style="margin-bottom:20px; font-size:24px;">Add on, or book the lot</h3>
+          <p style="margin-bottom:12px; display:flex; justify-content:space-between;"><span>Pottery shed, one piece fired</span><strong class="turmeric-text tabular">Rs 900</strong></p>
+          <p style="margin-bottom:12px; display:flex; justify-content:space-between;"><span>Growing workshop, adults</span><strong class="turmeric-text tabular">Rs 1,200</strong></p>
+          <p style="margin-bottom:12px; display:flex; justify-content:space-between;"><span>School visit (min 40 children)</span><strong class="turmeric-text tabular">Rs 800 a child</strong></p>
+          <p style="margin-bottom:12px; display:flex; justify-content:space-between;"><span>Private buyout (up to 50)</span><strong class="turmeric-text tabular">From Rs 1,50,000</strong></p>
+          <p style="display:flex; justify-content:space-between;"><span>Corporate day (up to 40)</span><strong class="turmeric-text tabular">From Rs 1,80,000</strong></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. THE CRATE -->
+  <section style="padding:80px 0;">
+    <div class="container">
+      <h2 style="font-size:38px; margin-bottom:12px;">The crate, a subscription</h2>
+      <p style="color:var(--color-text-secondary); max-width:720px; margin-bottom:40px;">Most people who visit once want the vegetables again. Crates are packed Friday night and delivered across Bengaluru on Saturday, and they hold whatever the calendar says is ready, which is the whole idea.</p>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:24px;">
+        <div class="card"><h4>Fortnightly, small</h4><p style="font-size:13px; color:var(--color-text-secondary); margin:8px 0;">4–5 kilos, feeds two</p><span class="turmeric-text tabular" style="font-size:22px;">Rs 1,400</span> <small>/month</small></div>
+        <div class="card"><h4>Weekly, small</h4><p style="font-size:13px; color:var(--color-text-secondary); margin:8px 0;">4–5 kilos, feeds two</p><span class="turmeric-text tabular" style="font-size:22px;">Rs 2,600</span> <small>/month</small></div>
+        <div class="card" style="border:2px solid var(--color-turmeric);"><h4>Weekly, family</h4><p style="font-size:13px; color:var(--color-text-secondary); margin:8px 0;">8–10 kilos, feeds four</p><span class="turmeric-text tabular" style="font-size:22px;">Rs 4,200</span> <small>/month</small></div>
+        <div class="card"><h4>Membership</h4><p style="font-size:13px; color:var(--color-text-secondary); margin:8px 0;">Weekly family crate, 2 visits/year</p><span class="turmeric-text tabular" style="font-size:22px;">Rs 48,000</span> <small>/year</small></div>
+      </div>
+      <p style="text-align:center; margin-top:32px; font-size:14px; color:var(--color-text-secondary);">Pause any week. Cancel whenever. No contract.</p>
+    </div>
+  </section>
+
+  <!-- 9. WHY IT IS BUILT THIS WAY -->
+  <section style="padding:80px 0; background:var(--color-surface); border-y:1px solid var(--color-border);">
+    <div class="container">
+      <h2 style="font-size:38px; margin-bottom:12px;">Why it is built this way</h2>
+      <p style="color:var(--color-text-secondary); max-width:700px; margin-bottom:48px;">Organic on a label asks you to trust a certificate. It seemed simpler to let you cut the thing yourself. Everything else here follows from that one decision, including the parts that cost us money.</p>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:32px;">
+        <div><div class="stat-fig tabular">14</div><p style="color:var(--color-text-secondary);">acres, of which eleven are under cultivation</p></div>
+        <div><div class="stat-fig">Year 2</div><p style="color:var(--color-text-secondary);">of the three-year organic conversion</p></div>
+        <div><div class="stat-fig tabular">50</div><p style="color:var(--color-text-secondary);">guests a day, across two sittings</p></div>
+        <div><div class="stat-fig tabular">60%</div><p style="color:var(--color-text-secondary);">of each plate cut on the farm that morning, minimum</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10. VISIT -->
+  <section id="visit" style="padding:80px 0;">
+    <div class="container">
+      <h2 style="font-size:38px; margin-bottom:40px;">Visit</h2>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(360px, 1fr)); gap:48px;">
+        <div>
+          <h3 style="font-size:22px; margin-bottom:8px;">Address</h3>
+          <p style="color:var(--color-text-secondary); margin-bottom:24px;">Survey No. 112/3, Bilikal Betta Road, Harohalli Hobli,<br>Kanakapura Taluk, Ramanagara District, Karnataka 562112</p>
+          <h3 style="font-size:22px; margin-bottom:8px;">The drive</h3>
+          <p style="color:var(--color-text-secondary); margin-bottom:24px;">58 km from MG Road, about 90 minutes on a Sunday morning. Straight down Kanakapura Road, left after the Harohalli industrial gate, then two kilometres of farm track.</p>
+          <h3 style="font-size:22px; margin-bottom:8px;">Opening hours</h3>
+          <p style="color:var(--color-text-secondary);">Open Monday to Sunday, all 7 days a week. Closed through most of June for monsoon replenishment.<br>Two sittings daily: 8:30am and 11:30am. Twenty-five guests per sitting, fifty a day maximum.</p>
+        </div>
+        <div class="card" style="background:var(--color-surface-subtle); display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center;">
+          <strong style="font-family:'Fraunces',serif; font-size:20px;">Route from Bengaluru</strong>
+          <p style="font-size:13px; color:var(--color-text-secondary); margin-top:8px;">MG Road (0 km) ↓ Kanakapura Road (NH 948) ↓ Harohalli Gate ↓ Harvest Hour Farm</p>
+          <div style="margin-top:20px; font-size:24px; font-weight:700; color:var(--color-turmeric); font-family:'Fraunces',serif;">58 km · 90 min</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11. BOOKING SECTION -->
+  <section id="book-a-day" style="padding:80px 0; background:var(--color-surface); border-t:1px solid var(--color-border);">
+    <div class="container" style="max-width:860px;">
+      <h2 style="font-size:38px; margin-bottom:12px;">Reserve your day</h2>
+      <p style="color:var(--color-text-secondary); margin-bottom:36px;">Select your date, guest party, and add-on workshops. Total calculates live.</p>
+
+      <div id="booking-container" class="card">
+        <form id="book-form">
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px;">
+            <div class="form-group">
+              <label>Visit Date (Open all 7 days)</label>
+              <input type="date" id="form-date" class="form-control" required />
+            </div>
+            <div class="form-group">
+              <label>Sitting</label>
+              <select id="form-sitting" class="form-control">
+                <option value="morning">8:30am Morning Harvest</option>
+                <option value="midday">11:30am Midday Table</option>
+              </select>
+            </div>
+          </div>
+
+          <div style="display:grid; grid-template-columns:repeat(4, 1fr); gap:16px;">
+            <div class="form-group"><label>Adults</label><input type="number" id="form-adults" class="form-control tabular" value="2" min="1" max="25" /></div>
+            <div class="form-group"><label>Children (5–15)</label><input type="number" id="form-children" class="form-control tabular" value="1" min="0" /></div>
+            <div class="form-group"><label>Pottery (Rs 900)</label><input type="number" id="form-pottery" class="form-control tabular" value="0" min="0" /></div>
+            <div class="form-group"><label>Workshop (Rs 1200)</label><input type="number" id="form-workshop" class="form-control tabular" value="0" min="0" /></div>
+          </div>
+
+          <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:16px;">
+            <div class="form-group"><label>Your Name</label><input type="text" id="form-name" class="form-control" placeholder="Full name" required /></div>
+            <div class="form-group"><label>Phone</label><input type="tel" id="form-phone" class="form-control" placeholder="+91..." required /></div>
+            <div class="form-group"><label>Email</label><input type="email" id="form-email" class="form-control" placeholder="name@email.com" required /></div>
+          </div>
+
+          <div class="form-group">
+            <label>Anything the chef should know</label>
+            <textarea id="form-notes" class="form-control" rows="2" placeholder="Dietary restrictions, allergies..."></textarea>
+          </div>
+
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-top:24px; padding-top:20px; border-top:1px solid var(--color-border);">
+            <div>
+              <span style="font-size:13px; color:var(--color-text-secondary);">Calculated Total:</span>
+              <div id="live-total" class="turmeric-text tabular" style="font-size:28px; font-family:'Fraunces',serif;">Rs 0</div>
+            </div>
+            <button type="submit" class="btn-primary" style="padding:14px 32px;">Confirm Booking</button>
+          </div>
+        </form>
+
+        <div id="confirmation-panel" style="display:none; text-align:center; padding:32px 16px;">
+          <h3 style="font-size:28px; color:var(--color-primary); margin-bottom:8px;">Booking Confirmed</h3>
+          <p style="font-size:18px; margin-bottom:16px;">Reference: <strong id="conf-ref" class="turmeric-text tabular"></strong></p>
+          <div id="conf-summary" style="color:var(--color-text-secondary); max-width:480px; margin:0 auto 24px; font-size:14px;"></div>
+          <button type="button" class="btn-secondary" onclick="document.getElementById('confirmation-panel').style.display='none'; document.getElementById('book-form').style.display='block';">Book Another Day</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 12. FOOTER -->
+  <footer>
+    <div class="container">
+      <div style="display:flex; justify-content:space-between; flex-wrap:wrap; gap:32px; padding-bottom:48px; border-bottom:1px solid #242F20;">
+        <div>
+          <strong style="font-family:'Fraunces',serif; font-size:22px; display:block;">Harvest Hour</strong>
+          <small style="color:#7D9176;">Farm to Fork · Bengaluru South</small>
+        </div>
+        <div>
+          <p style="font-size:13px; color:#A4B59D;">Email: <span style="color:#E5EAE1; user-select:all;">visit@harvesthour.in</span></p>
+          <p style="font-size:13px; color:#A4B59D; margin-top:4px;">Phone: <span style="color:#E5EAE1; user-select:all;">+91 80 2843 7100</span></p>
+        </div>
+      </div>
+      <div style="padding-top:24px; display:flex; justify-content:space-between; font-size:12px; color:#7D9176; flex-wrap:wrap; gap:16px;">
+        <span>© Harvest Hour · All rights reserved.</span>
+        <span style="font-style:italic;">A student venture concept, Goa Institute of Management.</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- INLINE JAVASCRIPT LOGIC -->
+  <script>
+    // Booking Calculation
+    const dateInput = document.getElementById('form-date');
+    const adultsInput = document.getElementById('form-adults');
+    const childrenInput = document.getElementById('form-children');
+    const potteryInput = document.getElementById('form-pottery');
+    const workshopInput = document.getElementById('form-workshop');
+    const totalEl = document.getElementById('live-total');
+
+    // Default to coming Saturday
+    const d = new Date();
+    d.setDate(d.getDate() + ((6 - d.getDay() + 7) % 7 || 7));
+    dateInput.value = d.toISOString().split('T')[0];
+
+    function calcTotal() {
+      if (!dateInput.value) { totalEl.textContent = 'Rs 0'; return 0; }
+      const selDate = new Date(dateInput.value + 'T12:00:00');
+      const day = selDate.getDay();
+      const month = selDate.getMonth() + 1;
+
+      let adultRate = 2800;
+      const isWeekend = (day === 0 || day === 6);
+      const isPeak = (month === 11 || month === 12 || month === 1 || month === 2);
+
+      if (isWeekend && isPeak) adultRate = 4200;
+      else if (isWeekend) adultRate = 3500;
+
+      const adults = parseInt(adultsInput.value) || 0;
+      const children = parseInt(childrenInput.value) || 0;
+      const pottery = parseInt(potteryInput.value) || 0;
+      const workshop = parseInt(workshopInput.value) || 0;
+
+      const total = (adults * adultRate) + (children * 1800) + (pottery * 900) + (workshop * 1200);
+      totalEl.textContent = 'Rs ' + total.toLocaleString('en-IN');
+      return total;
+    }
+
+    [dateInput, adultsInput, childrenInput, potteryInput, workshopInput].forEach(el => {
+      el.addEventListener('input', calcTotal);
+    });
+    calcTotal();
+
+    document.getElementById('book-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const total = calcTotal();
+      if (total === 0) {
+        alert('Please enter at least one adult or child for your reservation.');
+        return;
+      }
+      const ref = 'HH-' + Math.floor(1000 + Math.random() * 9000);
+      document.getElementById('conf-ref').textContent = ref;
+      document.getElementById('conf-summary').innerHTML = 'Reserved for ' + document.getElementById('form-name').value + ' on ' + dateInput.value + ' (' + document.getElementById('form-sitting').value + '). Total: <strong>' + totalEl.textContent + '</strong>.';
+      document.getElementById('book-form').style.display = 'none';
+      document.getElementById('confirmation-panel').style.display = 'block';
+    });
+  </script>
+</body>
+</html>

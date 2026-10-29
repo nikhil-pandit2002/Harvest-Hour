@@ -1,0 +1,6 @@
+{
+  "name": "Harvest Hour",
+  "description": "Fourteen organic acres an hour south of Bengaluru. Harvest your own vegetables, cook them with our chef, and sit down to them while they are still warm from the field.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
